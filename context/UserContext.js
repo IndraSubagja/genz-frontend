@@ -43,7 +43,7 @@ export function UserProvider({ children }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, userRegister, userLogin, userLogout }}>
+    <UserContext.Provider value={{ user, setUser, userRegister, userLogin, userLogout, message }}>
       <ModalProvider>
         <AsideProvider>{children}</AsideProvider>
       </ModalProvider>

@@ -102,6 +102,7 @@ export function AsideProvider({ children }) {
         clearCart,
         removeFromCart,
         dropCart,
+        message,
       }}
     >
       {children}
