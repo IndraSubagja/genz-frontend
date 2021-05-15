@@ -1,0 +1,7 @@
+:root {
+  --primary: hsl(226, 100%, 26%);
+  --primary-light: hsl(226, 100%, 56%);
+  --secondary: hsl(44, 100%, 50%);
+  --secondary-light: hsl(44, 100%, 60%);
+  --transition-normal: all 0.2s linear;
+}

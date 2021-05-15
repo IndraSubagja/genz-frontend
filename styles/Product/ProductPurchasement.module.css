@@ -1,0 +1,24 @@
+.purchasement > form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+.purchasement > form > select {
+  padding: 0.5rem 1.6rem;
+}
+
+.buy {
+  flex: 1;
+}
+.buy:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 576px) {
+  .purchasement > form > button:last-child > span:not(.inlineIcon) {
+    display: none;
+  }
+}
