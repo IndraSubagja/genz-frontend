@@ -1,0 +1,78 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s linear, visibility 0s linear 0.2s;
+  z-index: 3;
+  visibility: hidden;
+}
+
+.modals {
+  width: 90vw;
+  max-width: 50rem;
+  margin: 2rem auto;
+  transform: translateY(calc(-100% - 4rem));
+  transition: transform 0.2s linear;
+  overflow: hidden;
+}
+
+.modalsContainer {
+  width: 180vw;
+  max-width: 100rem;
+}
+.modalsContainer > li {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 90vw;
+  max-width: 50rem;
+  color: #fff;
+  padding: 1rem;
+  transition: transform 0.2s linear;
+}
+
+.modalBody {
+  position: relative;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+.modalBody > h2 {
+  text-align: center;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+}
+.modalBody > form > * {
+  margin-bottom: 1rem;
+}
+.modalBody > form > div > label {
+  display: block;
+  font-size: 1.6rem;
+  margin-bottom: 0.2rem;
+}
+.modalBody > form > div > input {
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+}
+.modalBody > p {
+  padding-left: 0.8rem;
+}
+.modalBody > p > a {
+  text-decoration: underline;
+}
+.modalBody > p > a:hover {
+  color: var(--primary-light);
+}
+
+.visible {
+  background-color: hsla(0, 0%, 100%, 0.4);
+  visibility: visible;
+  transition: background-color 0.2s linear, visibility 0s linear 0s;
+}
+.visible > .modals {
+  transform: translateY(0);
+}
