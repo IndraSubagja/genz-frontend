@@ -23,7 +23,7 @@ export default function Home({ products, error }) {
         <h1 className="error">{error}</h1>
       ) : (
         <>
-          <h1 className={styles.title}>Top Products {API_URL}</h1>
+          <h1 className={styles.title}>Top Products</h1>
           <div className={styles.productsContainer}>
             <ul className={styles.products}>
               {products.map((product) => (
