@@ -18,7 +18,7 @@
 }
 
 @media screen and (max-width: 576px) {
-  .purchasement > form > button:last-child > span:not(.inlineIcon) {
+  .purchasement > form > button:last-child > span + span {
     display: none;
   }
 }
