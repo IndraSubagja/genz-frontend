@@ -12,6 +12,7 @@ import optimizePrice from '../utils/optimizePrice';
 import sortImages from '../utils/sortImages';
 
 export default function Home({ products, error }) {
+  console.log(API_URL);
   return (
     <div className="content">
       <Head>
