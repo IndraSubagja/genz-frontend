@@ -30,7 +30,7 @@ export default function Home({ products, error }) {
                 <li key={product.id}>
                   <Link href={`/products/${product.id}`}>
                     <a className={styles.product}>
-                      <img src={`${API_URL}${product.images[0].url}`} alt={product.title} />
+                      <img src={product.images[0].url} alt={product.title} />
 
                       <div>
                         <ProductRating product={product} />

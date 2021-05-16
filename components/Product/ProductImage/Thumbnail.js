@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import styles from '../../../styles/Product/ProductImages.module.css';
 
 import { ArrowLeftIcon, ArrowRightIcon } from '../../../utils/icons';
-import { API_URL } from '../../../utils/urls';
 
 export default function Thumbnail({ product, order, setOrder }) {
   const [swipe, setSwipe] = useState([false, 0, 0]);
@@ -150,7 +149,7 @@ export default function Thumbnail({ product, order, setOrder }) {
                   onTouchStart={(event) => changePreview(event, index)}
                   className={order === index ? styles.active : ''}
                 >
-                  <img src={`${API_URL}${image.url}`} alt={image.name} />
+                  <img src={image.url} alt={image.name} />
                 </button>
               </li>
             ))}

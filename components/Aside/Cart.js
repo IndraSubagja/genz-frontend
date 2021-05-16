@@ -9,7 +9,6 @@ import styles from '../../styles/Aside/Cart.module.css';
 import { compareCartData } from '../../utils/compareData';
 import { ArrowBottomIcon, ArrowUpIcon } from '../../utils/icons';
 import optimizePrice from '../../utils/optimizePrice';
-import { API_URL } from '../../utils/urls';
 
 export default function Cart() {
   const { user } = useContext(UserContext);
@@ -20,7 +19,7 @@ export default function Cart() {
       <ul className={styles.itemsContainer}>
         {cart?.map((item) => (
           <li key={item.product.id}>
-            <img src={`${API_URL}${item.product.images[0].url}`} alt={item.product.title} />
+            <img src={item.product.images[0].url} alt={item.product.title} />
 
             <div>
               <Link href={`/products/${item.product.id}`}>

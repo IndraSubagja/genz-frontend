@@ -38,41 +38,45 @@ export default function ProductPurchasement({ product }) {
 
   return (
     <div className={styles.purchasement}>
-      <form onSubmit={purchasementHandler}>
-        <select name="qty" id="qty" className="btn" onChange={(event) => setQty(Number(event.target.value))}>
-          {[...Array(maxQty).keys()].map((x) => (
-            <option key={x + 1} value={x + 1}>
-              {x + 1}
-            </option>
-          ))}
-        </select>
+      {product.isAvailable ? (
+        <form onSubmit={purchasementHandler}>
+          <select name="qty" id="qty" className="btn" onChange={(event) => setQty(Number(event.target.value))}>
+            {[...Array(maxQty).keys()].map((x) => (
+              <option key={x + 1} value={x + 1}>
+                {x + 1}
+              </option>
+            ))}
+          </select>
 
-        <button
-          type="submit"
-          value="buy"
-          onClick={(event) => setAction(event.currentTarget.value)}
-          className={`${styles.buy} btn btn-primary`}
-        >
-          <span>{optimizePrice(product.price)}</span>
-        </button>
-        <button
-          type="submit"
-          value="cart"
-          onClick={(event) => setAction(event.currentTarget.value)}
-          className={`${styles.cart} btn btn-primary`}
-        >
-          {inCart ? (
-            <span>In Cart</span>
-          ) : (
-            <>
-              <span className="inlineIcon">
-                <CartAddIcon />
-              </span>
-              <span>Add to Cart</span>
-            </>
-          )}
-        </button>
-      </form>
+          <button
+            type="submit"
+            value="buy"
+            onClick={(event) => setAction(event.currentTarget.value)}
+            className={`${styles.buy} btn btn-primary`}
+          >
+            <span>{optimizePrice(product.price)}</span>
+          </button>
+          <button
+            type="submit"
+            value="cart"
+            onClick={(event) => setAction(event.currentTarget.value)}
+            className={`${styles.cart} btn btn-primary`}
+          >
+            {inCart ? (
+              <span>In Cart</span>
+            ) : (
+              <>
+                <span className="inlineIcon">
+                  <CartAddIcon />
+                </span>
+                <span>Add to Cart</span>
+              </>
+            )}
+          </button>
+        </form>
+      ) : (
+        <div className="btn danger">Product is Not Available</div>
+      )}
     </div>
   );
 }
