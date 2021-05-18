@@ -47,8 +47,16 @@ export function AsideProvider({ children }) {
   };
 
   const addToCart = (item) => {
-    setCart([...cart, item]);
-    localStorage.setItem('tempCart', JSON.stringify([...cart, item]));
+    const inCart = cart?.find((cartItem) => cartItem.product.id === item.product.id);
+
+    if (inCart) {
+      inCart.qty = item.qty;
+      setCart(cart);
+      localStorage.setItem('tempCart', JSON.stringify(cart));
+    } else {
+      setCart([...cart, item]);
+      localStorage.setItem('tempCart', JSON.stringify([...cart, item]));
+    }
   };
 
   const saveCart = async (user, updatedCart) => {
@@ -92,6 +100,8 @@ export function AsideProvider({ children }) {
         aside,
         active,
         cart,
+        message,
+        setCart,
         setActive,
         showAside,
         hideAside,
@@ -102,7 +112,6 @@ export function AsideProvider({ children }) {
         clearCart,
         removeFromCart,
         dropCart,
-        message,
       }}
     >
       {children}

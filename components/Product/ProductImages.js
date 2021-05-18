@@ -9,7 +9,7 @@ export default function ProductImages({ product }) {
   return (
     <>
       <Preview product={product} order={order} />
-      <Thumbnail product={product} order={order} setOrder={setOrder} />
+      {product.images.length > 1 && <Thumbnail product={product} order={order} setOrder={setOrder} />}
     </>
   );
 }

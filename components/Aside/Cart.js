@@ -9,17 +9,35 @@ import styles from '../../styles/Aside/Cart.module.css';
 import { compareCartData } from '../../utils/compareData';
 import { ArrowBottomIcon, ArrowUpIcon } from '../../utils/icons';
 import optimizePrice from '../../utils/optimizePrice';
+import { imageUrl } from '../../utils/urls';
 
 export default function Cart() {
   const { user } = useContext(UserContext);
-  const { cart, saveCart, clearCart, removeFromCart } = useContext(AsideContext);
+  const { cart, setCart, saveCart, clearCart, removeFromCart } = useContext(AsideContext);
+
+  const incrementQty = (index) => {
+    const updatedCart = [...cart];
+    updatedCart[index].qty += 1;
+
+    setCart(updatedCart);
+    localStorage.setItem('tempCart', JSON.stringify(updatedCart));
+  };
+  const decrementQty = (index) => {
+    const updatedCart = [...cart];
+    updatedCart[index].qty -= 1;
+
+    setCart(updatedCart);
+    localStorage.setItem('tempCart', JSON.stringify(updatedCart));
+  };
+
+  console.log(cart);
 
   return (
     <div className={styles.sectionContainer}>
       <ul className={styles.itemsContainer}>
-        {cart?.map((item) => (
+        {cart?.map((item, index) => (
           <li key={item.product.id}>
-            <img src={item.product.images[0].url} alt={item.product.title} />
+            <img src={imageUrl(item.product.images[0].url)} alt={item.product.title} />
 
             <div>
               <Link href={`/products/${item.product.id}`}>
@@ -39,11 +57,11 @@ export default function Cart() {
             </div>
 
             <div>
-              <button type="button">
+              <button type="button" disabled={cart[index].qty >= 8} onClick={() => incrementQty(index)}>
                 <ArrowUpIcon />
               </button>
-              <p>{item.qty}</p>
-              <button type="button">
+              <p>{cart[index].qty}</p>
+              <button type="button" disabled={cart[index].qty <= 1} onClick={() => decrementQty(index)}>
                 <ArrowBottomIcon />
               </button>
             </div>
@@ -60,7 +78,7 @@ export default function Cart() {
         >
           Save
         </button>
-        <button type="submit" className="btn btn-block btn-primary" onClick={clearCart} disabled={!cart?.length}>
+        <button type="submit" className="btn btn-block btn-danger" onClick={clearCart} disabled={!cart?.length}>
           Clear
         </button>
       </div>

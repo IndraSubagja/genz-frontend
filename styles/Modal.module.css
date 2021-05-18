@@ -70,8 +70,8 @@
 
 .visible {
   background-color: hsla(0, 0%, 100%, 0.4);
-  visibility: visible;
   transition: background-color 0.2s linear, visibility 0s linear 0s;
+  visibility: visible;
 }
 .visible > .modals {
   transform: translateY(0);

@@ -18,6 +18,7 @@
   padding: 1rem;
   opacity: 0.6;
 }
+.sectionsHeader > a:hover,
 .sectionsHeader > a.active {
   opacity: 1;
 }

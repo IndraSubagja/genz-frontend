@@ -1,3 +1,4 @@
+import { useContext, useEffect } from 'react';
 import Head from 'next/head';
 // import Link from 'next/link';
 import axios from 'axios';
@@ -7,12 +8,24 @@ import ProductSections from '../../components/Product/ProductSections';
 import ProductImages from '../../components/Product/ProductImages';
 import ProductPurchasement from '../../components/Product/ProductPurchasement';
 
+import AsideContext from '../../context/AsideContext';
+import ModalContext from '../../context/ModalContext';
+
 import styles from '../../styles/Product.module.css';
 
 import { API_URL } from '../../utils/urls';
 import sortImages from '../../utils/sortImages';
+import optimizePrice from '../../utils/optimizePrice';
 
 export default function Product({ product, error }) {
+  const { hideAside } = useContext(AsideContext);
+  const { hideModal } = useContext(ModalContext);
+
+  useEffect(() => {
+    hideAside();
+    hideModal();
+  }, []);
+
   return (
     <div className="content">
       <Head>
@@ -31,8 +44,8 @@ export default function Product({ product, error }) {
 
             <div className={styles.details}>
               <h1 className={styles.title}>{product.title}</h1>
-
               <ProductRating product={product} />
+              <h3 className="price">{optimizePrice(product.price)}</h3>
               <ProductPurchasement product={product} />
               <ProductSections product={product} />
             </div>
@@ -49,7 +62,7 @@ export async function getStaticPaths() {
   return {
     paths: products.map((product) => ({
       params: {
-        slug: String(product.id),
+        id: String(product.id),
       },
     })),
 
@@ -57,9 +70,9 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { id } }) {
   try {
-    const { data: product } = await axios.get(`${API_URL}/products/${slug}`);
+    const { data: product } = await axios.get(`${API_URL}/products/${id}`);
 
     sortImages(product);
 

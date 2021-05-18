@@ -1,0 +1,21 @@
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s linear, visibility 0s linear 0.2s;
+  z-index: 3;
+  visibility: hidden;
+}
+.loading > img {
+  width: 8rem;
+  height:8rem;
+}
+
+.visible {
+  background-color: hsla(0, 0%, 100%, 0.8);
+  transition: background-color 0.2s linear, visibility 0s linear 0s;
+  visibility: visible;
+}

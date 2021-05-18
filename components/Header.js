@@ -14,22 +14,34 @@ import { ArrowBottomIcon, CartIcon, LoginIcon, LoveIcon, SearchIcon } from '../u
 export default function Header() {
   const [dropdown, setDropdown] = useState(false);
   const [pos, setPos] = useState(null);
-  const [deviceWidth, setDeviceWidth] = useState(null);
+  const [logo, setLogo] = useState('/logo.svg');
 
   const { user } = useContext(UserContext);
   const { showAside } = useContext(AsideContext);
   const { showModal } = useContext(ModalContext);
 
   useEffect(() => {
-    const getScreen = () => {
-      setDeviceWidth(innerWidth);
+    const responsiveLogo = () =>
+      matchMedia('(max-width:576px)').matches ? setLogo('/icon.svg') : setLogo('/logo.svg');
+
+    const optimizeDropdown = () => {
+      const accountDropdown = document.getElementById('accountDropdown');
+      const left = accountDropdown?.getBoundingClientRect().left - 160;
+
+      setPos(left);
     };
 
-    getScreen();
-    window.addEventListener('resize', getScreen);
+    responsiveLogo();
+    optimizeDropdown();
 
-    return () => window.removeEventListener('resize', getScreen);
-  }, []);
+    window.addEventListener('resize', responsiveLogo);
+    window.addEventListener('resize', optimizeDropdown);
+
+    return () => {
+      window.removeEventListener('resize', responsiveLogo);
+      window.removeEventListener('resize', optimizeDropdown);
+    };
+  }, [user]);
 
   return (
     <>
@@ -45,7 +57,7 @@ export default function Header() {
         <header className={styles.header}>
           <Link href="/">
             <a>
-              <img src={deviceWidth <= 576 ? '/icon.svg' : '/logo.svg'} alt="GENZ" className={styles.logo} />
+              <img src={logo} alt="GENZ" className={styles.logo} />
             </a>
           </Link>
 
@@ -89,22 +101,14 @@ export default function Header() {
                   </a>
                 </Link>
 
-                <a
-                  id="accountDropdown"
-                  onClick={(event) => {
-                    const left = event.currentTarget.getBoundingClientRect().left - 160;
-
-                    setPos(left);
-                    setDropdown(true);
-                  }}
-                >
+                <a id="accountDropdown" onClick={() => setDropdown(true)}>
                   <ArrowBottomIcon />
                 </a>
               </div>
             </>
           )}
 
-          <Dropdown visible={dropdown} onClick={() => setDropdown(false)} />
+          {user && <Dropdown visible={dropdown} onClick={() => setDropdown(false)} />}
         </header>
       </div>
     </>

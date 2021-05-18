@@ -86,6 +86,12 @@ ul {
   min-height: calc(100vh - 10em);
   padding: 1rem;
   z-index: 1;
+  background-color: #eee;
+}
+
+.inlineIcon {
+  height: 1em;
+  margin-right: 0.5rem;
 }
 
 .empty {
@@ -102,7 +108,7 @@ ul {
   color: #ffc037;
 }
 .danger {
-  color: #ff3737;
+  color: var(--danger);
 }
 
 /* Button */
@@ -130,15 +136,20 @@ ul {
 .btn-primary:hover:not(:disabled) {
   background-color: var(--secondary-light);
 }
+.btn-danger {
+  background-color: var(--danger);
+}
+.btn-danger:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.btn-danger:hover:not(:disabled) {
+  background-color: var(--danger-light);
+}
 
 .close {
   position: absolute;
   top: 1rem;
   left: 1rem;
   height: 2rem;
-}
-
-.inlineIcon {
-  height: 1em;
-  margin-right: 0.5rem;
 }

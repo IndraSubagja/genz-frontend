@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import AsideContext from '../../context/AsideContext';
 import ModalContext from '../../context/ModalContext';
@@ -7,7 +7,6 @@ import UserContext from '../../context/UserContext';
 import styles from '../../styles/Product/ProductPurchasement.module.css';
 
 import { CartAddIcon } from '../../utils/icons';
-import optimizePrice from '../../utils/optimizePrice';
 
 export default function ProductPurchasement({ product }) {
   const [action, setAction] = useState(null);
@@ -19,16 +18,14 @@ export default function ProductPurchasement({ product }) {
 
   product.stock = 8;
   const maxQty = product.stock > 9 ? 10 : product.stock;
-  const inCart = cart?.some((item) => item.product.id === product.id);
+  const inCart = cart?.find((item) => item.product.id === product.id);
 
   const purchasementHandler = async (event) => {
     event.preventDefault();
 
     if (action === 'cart') {
       if (user) {
-        if (!inCart) {
-          await addToCart({ qty, product });
-        }
+        await addToCart({ qty, product });
         showAside(0);
       } else {
         showModal(0);
@@ -36,11 +33,25 @@ export default function ProductPurchasement({ product }) {
     }
   };
 
+  useEffect(() => {
+    if (inCart) {
+      setQty(inCart.qty);
+    } else {
+      setQty(1);
+    }
+  }, [cart]);
+
   return (
     <div className={styles.purchasement}>
       {product.isAvailable ? (
         <form onSubmit={purchasementHandler}>
-          <select name="qty" id="qty" className="btn" onChange={(event) => setQty(Number(event.target.value))}>
+          <select
+            name="qty"
+            id="qty"
+            value={qty}
+            className="btn"
+            onChange={(event) => setQty(Number(event.target.value))}
+          >
             {[...Array(maxQty).keys()].map((x) => (
               <option key={x + 1} value={x + 1}>
                 {x + 1}
@@ -54,7 +65,7 @@ export default function ProductPurchasement({ product }) {
             onClick={(event) => setAction(event.currentTarget.value)}
             className={`${styles.buy} btn btn-primary`}
           >
-            <span>{optimizePrice(product.price)}</span>
+            <span>Buy Now</span>
           </button>
           <button
             type="submit"

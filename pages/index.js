@@ -1,17 +1,28 @@
+import { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import axios from 'axios';
 
 import ProductRating from '../components/Product/ProductRating';
-import ProductStock from '../components/Product/ProductStock';
+
+import AsideContext from '../context/AsideContext';
+import ModalContext from '../context/ModalContext';
 
 import styles from '../styles/Home.module.css';
 
-import { API_URL } from '../utils/urls';
+import { API_URL, imageUrl } from '../utils/urls';
 import optimizePrice from '../utils/optimizePrice';
 import sortImages from '../utils/sortImages';
 
 export default function Home({ products, error }) {
+  const { hideAside } = useContext(AsideContext);
+  const { hideModal } = useContext(ModalContext);
+
+  useEffect(() => {
+    hideAside();
+    hideModal();
+  }, []);
+
   return (
     <div className="content">
       <Head>
@@ -30,7 +41,7 @@ export default function Home({ products, error }) {
                 <li key={product.id}>
                   <Link href={`/products/${product.id}`}>
                     <a className={styles.product}>
-                      <img src={product.images[0].url} alt={product.title} />
+                      <img src={imageUrl(product.images[0].url)} alt={product.title} />
 
                       <div>
                         <ProductRating product={product} />
@@ -38,7 +49,11 @@ export default function Home({ products, error }) {
                         <h3 className="price">{optimizePrice(product.price)}</h3>
                       </div>
 
-                      <ProductStock product={product} />
+                      {!product.isAvailable && (
+                        <div className={`${styles.unavailable} danger`}>
+                          <span>Out of Stock</span>
+                        </div>
+                      )}
                     </a>
                   </Link>
                 </li>

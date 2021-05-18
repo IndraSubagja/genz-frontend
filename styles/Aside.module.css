@@ -74,8 +74,8 @@
 
 .visible {
   background-color: hsla(44, 100%, 50%, 0.4);
-  visibility: visible;
   transition: background-color 0.2s linear, visibility 0s linear 0s;
+  visibility: visible;
 }
 .visible > .asideContainer {
   transform: translateX(0);

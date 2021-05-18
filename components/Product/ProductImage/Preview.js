@@ -3,6 +3,8 @@ import { useTransition, animated } from 'react-spring';
 
 import styles from '../../../styles/Product/ProductImages.module.css';
 
+import { imageUrl } from '../../../utils/urls';
+
 export default function Preview({ product, order }) {
   const [ratio, setRatio] = useState(null);
   const [width, setWidth] = useState(null);
@@ -32,7 +34,7 @@ export default function Preview({ product, order }) {
 
   useEffect(() => {
     const img = new Image();
-    img.src = product.images[order].url;
+    img.src = imageUrl(product.images[order].url);
 
     const getImageSize = () => {
       const preview = document.querySelector(`.${styles.preview}`);
@@ -49,14 +51,14 @@ export default function Preview({ product, order }) {
   }, []);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div className={styles.previewContainer}>
       {fade((transition, item) => (
         <>
           <style jsx global>
             {`
               .${styles.preview}:last-child {
                 position: relative;
-                background-image: url(${product.images[item].url});
+                background-image: url(${imageUrl(product.images[item].url)});
                 padding-top: ${ratio}%;
               }
               .${styles.preview}):not(:last-child {
