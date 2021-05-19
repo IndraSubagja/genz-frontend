@@ -30,8 +30,6 @@ export default function Cart() {
     localStorage.setItem('tempCart', JSON.stringify(updatedCart));
   };
 
-  console.log(cart);
-
   return (
     <div className={styles.sectionContainer}>
       <ul className={styles.itemsContainer}>

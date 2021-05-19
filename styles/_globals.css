@@ -86,7 +86,7 @@ ul {
   min-height: calc(100vh - 10em);
   padding: 1rem;
   z-index: 1;
-  background-color: #eee;
+  background-color: var(--base);
 }
 
 .inlineIcon {

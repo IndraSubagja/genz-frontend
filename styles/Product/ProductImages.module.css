@@ -28,12 +28,12 @@
 
 .arrow {
   position: absolute;
-  color: var(--secondary);
+  color: var(--danger);
   top: calc(50% - 1rem);
   opacity: 0.8;
 }
 .arrow:disabled {
-  opacity: 0.6;
+  opacity: 0.4;
   cursor: default;
 }
 .arrow:hover:not(:disabled) {

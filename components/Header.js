@@ -64,7 +64,7 @@ export default function Header() {
           <form className={styles.search}>
             <input type="text" name="search" id="search" placeholder="Search...." />
             <Link href="/search">
-              <button type="submit" className="btn-primary">
+              <button type="submit" className="btn-danger">
                 <SearchIcon />
               </button>
             </Link>

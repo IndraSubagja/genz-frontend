@@ -13,7 +13,7 @@ export function AsideProvider({ children }) {
   const [cart, setCart] = useState(null);
   const [message, setMessage] = useState([]);
 
-  const { setUser } = useContext(UserContext);
+  const { setUser, setLoading } = useContext(UserContext);
 
   const showAside = async (active) => {
     setActive(active);
@@ -60,6 +60,8 @@ export function AsideProvider({ children }) {
   };
 
   const saveCart = async (user, updatedCart) => {
+    setLoading([true, 'high']);
+
     try {
       const { data } = await axios.put(`${API_URL}/users/me/cart`, updatedCart, {
         headers: {
@@ -68,10 +70,12 @@ export function AsideProvider({ children }) {
       });
 
       setUser({ ...user, cart: [...data.cart] });
+      setLoading([false, null]);
       localStorage.setItem('userInfo', JSON.stringify({ ...user, cart: [...data.cart] }));
     } catch (error) {
       const message = error.response && error.response.data.message ? error.response.data.message : error.message;
       setMessage(message);
+      setLoading([false, null]);
     }
   };
 

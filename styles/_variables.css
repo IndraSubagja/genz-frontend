@@ -1,4 +1,5 @@
 :root {
+  --base: hsl(0, 0%, 90%);
   --primary: hsl(226, 100%, 25%);
   --primary-light: hsl(226, 100%, 55%);
   --secondary: hsl(44, 100%, 50%);

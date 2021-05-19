@@ -1,6 +1,7 @@
 import Aside from '../components/Aside';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 import Modal from '../components/Modal';
 
 import { UserProvider } from '../context/UserContext';
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
       <Footer />
       <Aside />
       <Modal />
+      <Loading />
     </UserProvider>
   );
 }

@@ -73,7 +73,7 @@
 }
 .nav > a:hover,
 .profile > a:hover {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--danger-light);
 }
 
 .nav > a {
@@ -140,7 +140,7 @@
   line-height: 1.6rem;
 }
 .dropdown > li > a:hover {
-  background-color: var(--secondary);
+  background-color: var(--danger-light);
 }
 
 .visible {
