@@ -29,7 +29,7 @@ export function UserProvider({ children }) {
         message,
       });
     } else {
-      hideNotification(notification.status, notification.message);
+      hideNotification();
 
       setTimeout(() => {
         setNotification({
@@ -40,7 +40,7 @@ export function UserProvider({ children }) {
       }, 200);
     }
   };
-  const hideNotification = (status, message) => {
+  const hideNotification = (status = notification.status, message = notification.message) => {
     setNotification({
       state: false,
       status,
@@ -114,8 +114,8 @@ export function UserProvider({ children }) {
   useEffect(() => {
     if (notification.state) {
       const notificationTime = setTimeout(() => {
-        hideNotification(notification.status, notification.message);
-      }, 3000);
+        hideNotification();
+      }, 2000);
 
       return () => clearTimeout(notificationTime);
     }

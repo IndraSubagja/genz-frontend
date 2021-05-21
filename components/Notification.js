@@ -34,7 +34,7 @@ export default function Notification() {
             </span>
           )}
           <span>{message}</span>
-          <button type="button" onClick={() => hideNotification(status, message)}>
+          <button type="button" onClick={() => hideNotification()}>
             <CrossIcon />
           </button>
         </animated.div>
