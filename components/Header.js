@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useContext, useEffect, useState } from 'react';
 
 import Dropdown from './Header/Dropdown';
+import Auth from './Modal/Auth';
 
 import AsideContext from '../context/AsideContext';
 import ModalContext from '../context/ModalContext';
@@ -13,7 +14,6 @@ import { ArrowBottomIcon, CartIcon, LoginIcon, LoveIcon, SearchIcon } from '../u
 
 export default function Header() {
   const [dropdown, setDropdown] = useState(false);
-  const [pos, setPos] = useState(null);
   const [logo, setLogo] = useState('/logo.svg');
 
   const { user } = useContext(UserContext);
@@ -24,35 +24,15 @@ export default function Header() {
     const responsiveLogo = () =>
       matchMedia('(max-width:576px)').matches ? setLogo('/icon.svg') : setLogo('/logo.svg');
 
-    const optimizeDropdown = () => {
-      const accountDropdown = document.getElementById('accountDropdown');
-      const left = accountDropdown?.getBoundingClientRect().left - 160;
-
-      setPos(left);
-    };
-
     responsiveLogo();
-    optimizeDropdown();
 
     window.addEventListener('resize', responsiveLogo);
-    window.addEventListener('resize', optimizeDropdown);
 
-    return () => {
-      window.removeEventListener('resize', responsiveLogo);
-      window.removeEventListener('resize', optimizeDropdown);
-    };
-  }, [user]);
+    return () => window.removeEventListener('resize', responsiveLogo);
+  }, []);
 
   return (
     <>
-      <style jsx global>
-        {`
-          .${styles.dropdown} {
-            left: ${pos}px;
-          }
-        `}
-      </style>
-
       <div className={styles.headerContainer}>
         <header className={styles.header}>
           <Link href="/">
@@ -72,7 +52,7 @@ export default function Header() {
 
           {!user ? (
             <div className={styles.login}>
-              <button className="btn btn-primary" onClick={() => showModal(0)}>
+              <button className="btn btn-primary" onClick={() => showModal(<Auth />, 0)}>
                 <span className="inlineIcon">
                   <LoginIcon />
                 </span>
@@ -108,7 +88,7 @@ export default function Header() {
             </>
           )}
 
-          {user && <Dropdown visible={dropdown} onClick={() => setDropdown(false)} />}
+          <Dropdown dropdown={dropdown} setDropdown={setDropdown} />
         </header>
       </div>
     </>

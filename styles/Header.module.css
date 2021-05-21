@@ -59,6 +59,7 @@
   width: 100%;
   border-bottom-left-radius: 2.4rem;
   border-top-left-radius: 2.4rem;
+  background-color: #fff;
 }
 .search > button {
   border-bottom-right-radius: 2.4rem;
@@ -117,8 +118,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  transition: visibility 0s linear 0.2s;
-  visibility: hidden;
 }
 
 .dropdown {
@@ -127,8 +126,6 @@
   width: 16rem;
   background-color: rgb(44, 44, 44);
   border-radius: 0.5rem;
-  transform: translateY(calc(-100% - 2rem));
-  transition: transform 0.2s linear;
   overflow: hidden;
 }
 .dropdown > li > a {
@@ -143,21 +140,8 @@
   background-color: var(--danger-light);
 }
 
-.visible {
-  transition: visibility 0s linear 0s;
-  visibility: visible;
-}
-.visible > .dropdown {
-  transform: translateY(0);
-}
-
 @media screen and (max-width: 768px) {
   .nav > a:last-child {
-    display: none;
-  }
-}
-@media screen and (max-width: 576px) {
-  .nav > a:first-child {
     display: none;
   }
 }

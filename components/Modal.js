@@ -1,40 +1,59 @@
 import { useContext } from 'react';
-
-import Login from './Modal/Login';
-import Register from './Modal/Register';
+import { useTransition, animated } from 'react-spring';
 
 import ModalContext from '../context/ModalContext';
 
 import styles from '../styles/Modal.module.css';
 
 export default function Modal() {
-  const { modal, active, optimizeHideModal } = useContext(ModalContext);
+  const {
+    modal: { state, component },
+    optimizeHideModal,
+  } = useContext(ModalContext);
 
-  return (
-    <>
-      <style jsx>
-        {`
-          .${styles.modalsContainer} > li {
-            transform: translateX(${active * -100}%);
-          }
-        `}
-      </style>
+  const overlayTransition = useTransition(state, {
+    from: {
+      backgroundColor: 'transparent',
+    },
+    enter: {
+      backgroundColor: 'hsla(0, 0%, 100%, 0.4)',
+    },
+    leave: {
+      backgroundColor: 'transparent',
+    },
+    config: {
+      duration: 200,
+    },
+  });
 
-      <div
-        className={modal ? `${styles.modalOverlay} ${styles.visible}` : styles.modalOverlay}
-        onMouseDown={optimizeHideModal}
-      >
-        <div className={styles.modals}>
-          <ul className={styles.modalsContainer}>
-            <li>
-              <Login />
-            </li>
-            <li>
-              <Register />
-            </li>
-          </ul>
-        </div>
-      </div>
-    </>
+  const modalTransition = useTransition(state, {
+    from: {
+      transform: 'translateY(-100%)',
+    },
+    enter: {
+      transform: 'translateY(0%)',
+    },
+    leave: {
+      transform: 'translateY(-100%)',
+    },
+    config: {
+      duration: 200,
+    },
+  });
+
+  return overlayTransition(
+    (transition, item) =>
+      item && (
+        <animated.div className={styles.modalOverlay} style={transition} onMouseDown={optimizeHideModal}>
+          {modalTransition(
+            (transition, item) =>
+              item && (
+                <animated.div className={styles.modal} style={transition}>
+                  {component}
+                </animated.div>
+              )
+          )}
+        </animated.div>
+      )
   );
 }

@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
 
-import ModalContext from '../../context/ModalContext';
-import UserContext from '../../context/UserContext';
+import ModalContext from '../../../context/ModalContext';
+import UserContext from '../../../context/UserContext';
 
-import styles from '../../styles/Modal.module.css';
+import styles from '../../../styles/Modal/Auth.module.css';
 
-import { CrossIcon } from '../../utils/icons';
+import { CrossIcon } from '../../../utils/icons';
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { user, userRegister } = useContext(UserContext);
-  const { setActive, hideModal, optimizeHideModal } = useContext(ModalContext);
+  const { hideModal, changeActive, optimizeHideModal } = useContext(ModalContext);
 
   const registerHandler = (event) => {
     event.preventDefault();
@@ -29,7 +29,7 @@ export default function Login() {
   }, [user]);
 
   return (
-    <div className={styles.modalBody} onMouseDown={(event) => event.stopPropagation()}>
+    <div className={styles.authBody} onMouseDown={(event) => event.stopPropagation()}>
       <button type="button" className="close" onMouseDown={optimizeHideModal}>
         <CrossIcon />
       </button>
@@ -77,7 +77,7 @@ export default function Login() {
       </form>
 
       <p>
-        Already have an account? <a onClick={() => setActive(0)}>Login</a>
+        Already have an account? <a onClick={() => changeActive(0)}>Login</a>
       </p>
     </div>
   );

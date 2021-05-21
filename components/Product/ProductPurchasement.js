@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 
+import Auth from '../Modal/Auth';
+
 import AsideContext from '../../context/AsideContext';
 import ModalContext from '../../context/ModalContext';
 import UserContext from '../../context/UserContext';
@@ -28,7 +30,7 @@ export default function ProductPurchasement({ product }) {
         await addToCart({ qty, product });
         showAside(0);
       } else {
-        showModal(0);
+        showModal(<Auth />, 0);
       }
     }
   };

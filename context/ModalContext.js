@@ -3,16 +3,16 @@ import { createContext, useState } from 'react';
 const ModalContext = createContext();
 
 export function ModalProvider({ children }) {
-  const [modal, setModal] = useState(false);
-  const [active, setActive] = useState(0);
+  const [modal, setModal] = useState({});
 
-  const showModal = (active) => {
-    setActive(active);
-    setModal(true);
+  const showModal = (component, active) => {
+    setModal({ state: true, component, active });
   };
-
   const hideModal = () => {
-    setModal(false);
+    setModal({ ...modal, state: false });
+  };
+  const changeActive = (active) => {
+    setModal({ ...modal, active });
   };
 
   const optimizeHideModal = (event) => {
@@ -30,7 +30,7 @@ export function ModalProvider({ children }) {
   };
 
   return (
-    <ModalContext.Provider value={{ modal, active, setActive, showModal, hideModal, optimizeHideModal }}>
+    <ModalContext.Provider value={{ modal, showModal, hideModal, changeActive, optimizeHideModal }}>
       {children}
     </ModalContext.Provider>
   );

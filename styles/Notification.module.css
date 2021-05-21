@@ -1,0 +1,41 @@
+.notification {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  box-shadow: 0.2rem 0.2rem 1rem #c4c4c4;
+  border-radius: 2rem;
+  padding: 0.2rem 1rem;
+  z-index: 5;
+}
+.notification > * {
+  margin: 0.4rem 0;
+}
+.notification > :first-child {
+  display: flex;
+  border: 1px solid;
+  border-radius: 50%;
+  padding: 0.4rem;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+.notification > :first-child > svg {
+  height: 100%;
+}
+.notification > :nth-child(2) {
+  padding: 0 1rem;
+  border-right: 1px solid #c4c4c4;
+  border-left: 1px solid #c4c4c4;
+}
+.notification > :last-child {
+  display: flex;
+  height: 1rem;
+  color: #c4c4c4;
+}

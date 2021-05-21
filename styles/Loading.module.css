@@ -7,16 +7,9 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  transition: background-color 0.2s linear 0.2s, visibility 0s linear 0.4s;
+  background-color: #fff;
   z-index: 4;
-  visibility: hidden;
 }
-.loadingOverlay > img {
+.loadingOverlay > .loading {
   width: 6rem;
-}
-
-.visible {
-  transition: background-color 0.2s linear 0.2s, visibility 0s linear 0.2s;
-  visibility: visible;
 }

@@ -9,36 +9,91 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState([true, 'full']);
-  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState([true, 1]);
+  const [notification, setNotification] = useState({});
+
+  const showLoading = (opacity) => {
+    setLoading([true, opacity]);
+  };
+  const hideLoading = () => {
+    setTimeout(() => {
+      setLoading([false]);
+    }, 200);
+  };
+
+  const showNotification = (status, message) => {
+    if (!notification.state) {
+      setNotification({
+        state: true,
+        status,
+        message,
+      });
+    } else {
+      hideNotification(notification.status, notification.message);
+
+      setTimeout(() => {
+        setNotification({
+          state: true,
+          status,
+          message,
+        });
+      }, 200);
+    }
+  };
+  const hideNotification = (status, message) => {
+    setNotification({
+      state: false,
+      status,
+      message,
+    });
+  };
+
+  const updateUserCart = (updatedCart) => {
+    setUser({ ...user, cart: [...updatedCart] });
+    localStorage.setItem('userInfo', JSON.stringify({ ...user, cart: [...updatedCart] }));
+  };
 
   const userRegister = async (userData) => {
-    setLoading([true, 'high']);
+    showLoading(0.8);
 
     try {
       const { data } = await axios.post(`${API_URL}/auth/local/register`, userData);
+
+      showNotification(true, `Welcome, ${data.user.username}!`);
+      hideLoading();
+
       setUser({ token: data.jwt, ...data.user });
-      setLoading([false, null]);
       localStorage.setItem('userInfo', JSON.stringify({ token: data.jwt, ...data.user }));
     } catch (error) {
-      const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-      setMessage(message);
-      setLoading([false, null]);
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message[0].messages[0].message
+          : error.message;
+
+      showNotification(false, message);
+      hideLoading();
     }
   };
 
   const userLogin = async (userData) => {
-    setLoading([true, 'high']);
+    showLoading(0.8);
 
     try {
       const { data } = await axios.post(`${API_URL}/auth/local`, userData);
+
+      showNotification(true, `Welcome back, ${data.user.username}!`);
+      hideLoading();
+
       setUser({ token: data.jwt, ...data.user });
-      setLoading([false, null]);
       localStorage.setItem('userInfo', JSON.stringify({ token: data.jwt, ...data.user }));
     } catch (error) {
-      const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-      setMessage(message);
-      setLoading([false, null]);
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message[0].messages[0].message
+          : error.message;
+
+      showNotification(false, message);
+      hideLoading();
     }
   };
 
@@ -48,16 +103,40 @@ export function UserProvider({ children }) {
   };
 
   useEffect(() => {
-    if (!user && localStorage.getItem('userInfo')) {
-      setLoading([true, 'full']);
+    if ((!user && localStorage.getItem('userInfo')) || !document) {
+      showLoading(1);
       setUser(JSON.parse(localStorage.getItem('userInfo')));
     } else {
-      setLoading([false, null]);
+      hideLoading();
     }
   }, [user]);
 
+  useEffect(() => {
+    if (notification.state) {
+      const notificationTime = setTimeout(() => {
+        hideNotification(notification.status, notification.message);
+      }, 3000);
+
+      return () => clearTimeout(notificationTime);
+    }
+  }, [notification]);
+
   return (
-    <UserContext.Provider value={{ user, message, loading, setUser, setLoading, userRegister, userLogin, userLogout }}>
+    <UserContext.Provider
+      value={{
+        user,
+        loading,
+        notification,
+        updateUserCart,
+        showLoading,
+        hideLoading,
+        showNotification,
+        hideNotification,
+        userRegister,
+        userLogin,
+        userLogout,
+      }}
+    >
       <ModalProvider>
         <AsideProvider>{children}</AsideProvider>
       </ModalProvider>

@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import Modal from '../components/Modal';
+import Notification from '../components/Notification';
 
 import { UserProvider } from '../context/UserContext';
 
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }) {
       <Aside />
       <Modal />
       <Loading />
+      <Notification />
     </UserProvider>
   );
 }

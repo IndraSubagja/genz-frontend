@@ -8,20 +8,19 @@ import { API_URL } from '../utils/urls';
 const AsideContext = createContext();
 
 export function AsideProvider({ children }) {
-  const [aside, setAside] = useState(false);
-  const [active, setActive] = useState(0);
+  const [aside, setAside] = useState({});
   const [cart, setCart] = useState(null);
-  const [message, setMessage] = useState([]);
 
-  const { setUser, setLoading } = useContext(UserContext);
+  const { updateUserCart, showLoading, hideLoading, showNotification } = useContext(UserContext);
 
-  const showAside = async (active) => {
-    setActive(active);
-    setAside(true);
+  const showAside = (active) => {
+    setAside({ state: true, active });
   };
-
   const hideAside = () => {
-    setAside(false);
+    setAside({ ...aside, state: false });
+  };
+  const changeActive = (active) => {
+    setAside({ ...aside, active });
   };
 
   const optimizeHideAside = (event) => {
@@ -59,8 +58,13 @@ export function AsideProvider({ children }) {
     }
   };
 
+  const updateTempCart = (updatedCart) => {
+    setCart(updatedCart);
+    localStorage.setItem('tempCart', JSON.stringify(updatedCart));
+  };
+
   const saveCart = async (user, updatedCart) => {
-    setLoading([true, 'high']);
+    showLoading(0.8);
 
     try {
       const { data } = await axios.put(`${API_URL}/users/me/cart`, updatedCart, {
@@ -69,13 +73,15 @@ export function AsideProvider({ children }) {
         },
       });
 
-      setUser({ ...user, cart: [...data.cart] });
-      setLoading([false, null]);
-      localStorage.setItem('userInfo', JSON.stringify({ ...user, cart: [...data.cart] }));
+      showNotification(true, 'Cart updated successfully');
+      hideLoading();
+
+      updateUserCart(data.cart);
     } catch (error) {
       const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-      setMessage(message);
-      setLoading([false, null]);
+
+      showNotification(false, message);
+      hideLoading();
     }
   };
 
@@ -102,16 +108,14 @@ export function AsideProvider({ children }) {
     <AsideContext.Provider
       value={{
         aside,
-        active,
         cart,
-        message,
-        setCart,
-        setActive,
         showAside,
         hideAside,
+        changeActive,
         optimizeHideAside,
         getCart,
         addToCart,
+        updateTempCart,
         saveCart,
         clearCart,
         removeFromCart,

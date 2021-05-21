@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import AsideContext from '../../context/AsideContext';
 
-import ModalContext from '../../context/ModalContext';
-import UserContext from '../../context/UserContext';
+import AsideContext from '../../../context/AsideContext';
+import ModalContext from '../../../context/ModalContext';
+import UserContext from '../../../context/UserContext';
 
-import styles from '../../styles/Modal.module.css';
+import styles from '../../../styles/Modal/Auth.module.css';
 
-import { CrossIcon } from '../../utils/icons';
+import { CrossIcon } from '../../../utils/icons';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ export default function Login() {
 
   const { user, userLogin } = useContext(UserContext);
   const { cart, getCart } = useContext(AsideContext);
-  const { setActive, hideModal, optimizeHideModal } = useContext(ModalContext);
+  const { hideModal, changeActive, optimizeHideModal } = useContext(ModalContext);
 
   const loginHandler = (event) => {
     event.preventDefault();
@@ -31,7 +31,7 @@ export default function Login() {
   }, [user]);
 
   return (
-    <div className={styles.modalBody} onMouseDown={(event) => event.stopPropagation()}>
+    <div className={styles.authBody} onMouseDown={(event) => event.stopPropagation()}>
       <button type="button" className="close" onMouseDown={optimizeHideModal}>
         <CrossIcon />
       </button>
@@ -68,7 +68,7 @@ export default function Login() {
       </form>
 
       <p>
-        New customer? <a onClick={() => setActive(1)}>Create your account</a>
+        New customer? <a onClick={() => changeActive(1)}>Create your account</a>
       </p>
     </div>
   );
