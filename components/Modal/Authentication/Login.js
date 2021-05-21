@@ -19,7 +19,7 @@ export default function Login() {
   const loginHandler = (event) => {
     event.preventDefault();
 
-    userLogin({ identifier: email, password });
+    userLogin({ email, password });
     event.currentTarget.reset();
   };
 
