@@ -32,65 +32,63 @@ export default function Header() {
   }, []);
 
   return (
-    <>
-      <div className={styles.headerContainer}>
-        <header className={styles.header}>
-          <Link href="/">
-            <a>
-              <img src={logo} alt="GENZ" className={styles.logo} />
-            </a>
+    <div className={styles.headerContainer}>
+      <header className={styles.header}>
+        <Link href="/">
+          <a>
+            <img src={logo} alt="GENZ" className={styles.logo} />
+          </a>
+        </Link>
+
+        <form className={styles.search}>
+          <input type="text" name="search" id="search" placeholder="Search...." />
+          <Link href="/search">
+            <button type="submit" className="btn-danger">
+              <SearchIcon />
+            </button>
           </Link>
+        </form>
 
-          <form className={styles.search}>
-            <input type="text" name="search" id="search" placeholder="Search...." />
-            <Link href="/search">
-              <button type="submit" className="btn-danger">
-                <SearchIcon />
-              </button>
-            </Link>
-          </form>
+        {!user ? (
+          <div className={styles.login}>
+            <button className="btn btn-primary" onClick={() => showModal(<Auth />, 0)}>
+              <span className="inlineIcon">
+                <LoginIcon />
+              </span>
+              <span>Login</span>
+            </button>
+          </div>
+        ) : (
+          <>
+            <nav className={styles.nav}>
+              <a onClick={() => showAside(0)}>
+                {!!user.cart.length && (
+                  <div className={styles.badge}>{user.cart.length > 99 ? `99+` : user.cart.length}</div>
+                )}
+                <CartIcon />
+              </a>
 
-          {!user ? (
-            <div className={styles.login}>
-              <button className="btn btn-primary" onClick={() => showModal(<Auth />, 0)}>
-                <span className="inlineIcon">
-                  <LoginIcon />
-                </span>
-                <span>Login</span>
-              </button>
+              <a onClick={() => showAside(1)}>
+                <LoveIcon />
+              </a>
+            </nav>
+
+            <div className={styles.profile}>
+              <Link href="/user">
+                <a className={styles.avatar}>
+                  <img src="/icons/user.svg" alt="Avatar" />
+                </a>
+              </Link>
+
+              <a id="accountDropdown" onClick={() => setDropdown(true)}>
+                <ArrowBottomIcon />
+              </a>
             </div>
-          ) : (
-            <>
-              <nav className={styles.nav}>
-                <a onClick={() => showAside(0)}>
-                  {!!user.cart.length && (
-                    <div className={styles.badge}>{user.cart.length > 99 ? `99+` : user.cart.length}</div>
-                  )}
-                  <CartIcon />
-                </a>
+          </>
+        )}
 
-                <a onClick={() => showAside(1)}>
-                  <LoveIcon />
-                </a>
-              </nav>
-
-              <div className={styles.profile}>
-                <Link href="/user">
-                  <a className={styles.avatar}>
-                    <img src="/icons/user.svg" alt="Avatar" />
-                  </a>
-                </Link>
-
-                <a id="accountDropdown" onClick={() => setDropdown(true)}>
-                  <ArrowBottomIcon />
-                </a>
-              </div>
-            </>
-          )}
-
-          <Dropdown dropdown={dropdown} setDropdown={setDropdown} />
-        </header>
-      </div>
-    </>
+        <Dropdown dropdown={dropdown} setDropdown={setDropdown} />
+      </header>
+    </div>
   );
 }

@@ -13,7 +13,6 @@ import ModalContext from '../../context/ModalContext';
 
 import styles from '../../styles/Product.module.css';
 
-import { API_URL } from '../../utils/urls';
 import sortImages from '../../utils/sortImages';
 import optimizePrice from '../../utils/optimizePrice';
 
@@ -57,7 +56,7 @@ export default function Product({ product, error }) {
 }
 
 export async function getStaticPaths() {
-  const { data: products } = await axios.get(`${API_URL}/products`);
+  const { data: products } = await axios.get('/products');
 
   return {
     paths: products.map((product) => ({
@@ -72,7 +71,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { id } }) {
   try {
-    const { data: product } = await axios.get(`${API_URL}/products/${id}`);
+    const { data: product } = await axios.get(`/products/${id}`);
 
     sortImages(product);
 

@@ -10,7 +10,7 @@ import ModalContext from '../context/ModalContext';
 
 import styles from '../styles/Home.module.css';
 
-import { API_URL, imageUrl } from '../utils/urls';
+import { imageUrl } from '../utils/urls';
 import optimizePrice from '../utils/optimizePrice';
 import sortImages from '../utils/sortImages';
 
@@ -68,7 +68,7 @@ export default function Home({ products, error }) {
 
 export async function getStaticProps() {
   try {
-    const { data: products } = await axios.get(`${API_URL}/products`);
+    const { data: products } = await axios.get('/products');
 
     products.map((product) => sortImages(product));
 

@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import { AsideProvider } from './AsideContext';
 import { ModalProvider } from './ModalContext';
-import { API_URL } from '../utils/urls';
 
 const UserContext = createContext();
 
@@ -57,7 +56,7 @@ export function UserProvider({ children }) {
     showLoading(0.8);
 
     try {
-      const { data } = await axios.post(`${API_URL}/auth/local/register`, userData);
+      const { data } = await axios.post('/auth/local/register', userData);
 
       showNotification(true, `Welcome, ${data.user.username}!`);
       hideLoading();
@@ -79,7 +78,8 @@ export function UserProvider({ children }) {
     showLoading(0.8);
 
     try {
-      const { data } = await axios.post(`${API_URL}/auth/local`, userData);
+      const { data } = await axios.post('/auth/local', userData);
+      console.log(data);
 
       showNotification(true, `Welcome back, ${data.user.username}!`);
       hideLoading();

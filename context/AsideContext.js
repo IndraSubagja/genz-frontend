@@ -3,8 +3,6 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 import UserContext from './UserContext';
 
-import { API_URL } from '../utils/urls';
-
 const AsideContext = createContext();
 
 export function AsideProvider({ children }) {
@@ -67,7 +65,7 @@ export function AsideProvider({ children }) {
     showLoading(0.8);
 
     try {
-      const { data } = await axios.put(`${API_URL}/users/me/cart`, updatedCart, {
+      const { data } = await axios.put('/users/me/cart', updatedCart, {
         headers: {
           authorization: `Bearer ${user.token}`,
         },
