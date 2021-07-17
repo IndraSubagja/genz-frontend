@@ -1,0 +1,25 @@
+.modalBody {
+  position: relative;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  width: calc(100vw - 4rem);
+  max-width: 50rem;
+  color: #fff;
+  padding: 2rem;
+}
+
+.confirmEmail {
+  text-align: center;
+  width: 100%;
+  font-size: 1.4rem;
+}
+.confirmEmail > button {
+  font-size: 1.4rem;
+  text-decoration: underline;
+}
+.confirmEmail > button:hover {
+  color: var(--primary-light);
+}
+.confirmEmail + * {
+  margin-top: 1rem;
+}

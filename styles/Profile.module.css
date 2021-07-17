@@ -1,0 +1,79 @@
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+.avatar {
+  position: relative;
+  width: 12rem;
+  height: 12rem;
+}
+.avatar * {
+  line-height: 0;
+}
+.avatar > div:first-child {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: 3px solid var(--primary-light);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar > div:first-child > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 5rem;
+  line-height: 0;
+  pointer-events: none;
+}
+.avatar > div:first-child > img {
+  background-color: var(--danger-light);
+}
+.avatar > button {
+  position: absolute;
+  top: -3%;
+  left: -3%;
+  border-radius: 50%;
+  padding: 0.8rem;
+}
+.avatar > div:last-child {
+  position: absolute;
+  right: -3%;
+  bottom: -3%;
+  color: var(--primary);
+}
+.avatar > button > span,
+.avatar > div:last-child > label {
+  display: block;
+  height: 100%;
+  background-color: var(--grey);
+  border: 3px solid var(--primary-light);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.avatar > div:last-child > label {
+  padding: 0.5rem;
+}
+.avatar > div:last-child > input {
+  display: none;
+}

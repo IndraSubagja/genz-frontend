@@ -11,11 +11,11 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 90vw;
+  width: calc(100vw - 2rem);
   height: 100%;
   max-width: 32rem;
   background-color: #fff;
-  padding: 4rem 2rem 2rem;
+  padding: 2rem;
 }
 
 .sections {
@@ -29,18 +29,19 @@
   align-items: center;
   justify-content: space-around;
   width: 100%;
+  border-bottom: 1px solid var(--grey);
   margin-bottom: 1rem;
-  border-bottom: 1px solid #c4c4c4;
+  padding: 0.3rem;
 }
-.sectionsHeader > a {
+.sectionsHeader > button {
   text-align: center;
   width: 100%;
   padding: 1rem;
-  opacity: 0.6;
+  color: var(--grey-dark);
 }
-.sectionsHeader > a:hover,
-.sectionsHeader > a.active {
-  opacity: 1;
+.sectionsHeader > button:hover,
+.sectionsHeader > button.active {
+  color: #000;
 }
 
 .sectionsSlider {
@@ -62,7 +63,12 @@
   vertical-align: top;
   width: calc(100% / 2);
   height: 100%;
-  padding: 0.5rem;
   transition: var(--transition-normal);
   overflow-y: auto;
+}
+
+@media only screen and (max-width: 320px) {
+  .asideContainer {
+    width: 100vw;
+  }
 }

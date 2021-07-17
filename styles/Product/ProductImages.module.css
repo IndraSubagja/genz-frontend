@@ -34,7 +34,6 @@
 }
 .arrow:disabled {
   opacity: 0.4;
-  cursor: default;
 }
 .arrow:hover:not(:disabled) {
   opacity: 1;
@@ -58,9 +57,12 @@
 .thumbnail > li > button > img {
   pointer-events: none;
 }
-.thumbnail > li > button:hover > img {
+.thumbnail > li > button:hover > img,
+.thumbnail > li > button:focus-visible > img,
+.thumbnail > li > button.active > img {
+  border-radius: 0.5rem;
   border: 3px solid var(--primary-light);
 }
-.thumbnail > li > button.active > img {
-  border: 3px solid var(--primary-light);
+.thumbnail > li > button:focus-visible {
+  box-shadow: none;
 }

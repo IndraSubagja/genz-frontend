@@ -7,28 +7,31 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   width: 100%;
+  border-bottom: 1px solid var(--grey);
   margin-bottom: 1rem;
-  border-bottom: 1px solid #c4c4c4;
+  padding: 0.3rem;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
-.sectionsHeader > a {
+.sectionsHeader > button {
   text-align: center;
   width: 100%;
-  padding: 1rem;
-  opacity: 0.6;
+  padding: 1rem 2rem;
+  color: var(--grey-dark);
+  white-space: nowrap;
 }
-.sectionsHeader > a:hover,
-.sectionsHeader > a.active {
-  opacity: 1;
+.sectionsHeader > button:hover,
+.sectionsHeader > button.active {
+  color: #000;
 }
 
 .sectionsSlider {
   position: absolute;
   left: 0;
   bottom: -1px;
-  width: calc(100% / 3);
-  height: 2px;
+  height: 3px;
   background-color: var(--secondary);
   transition: var(--transition-normal);
 }
@@ -36,12 +39,12 @@
 .sectionsBody {
   height: 26rem;
   transition: var(--transition-normal);
-  width: 300%;
+  width: 400%;
 }
 .sectionsBody > li {
   display: inline-block;
   vertical-align: top;
-  width: calc(100% / 3);
+  width: calc(100% / 4);
   height: 100%;
   padding: 0.5rem;
   transition: var(--transition-normal);
@@ -51,7 +54,7 @@
 .description {
   text-align: justify;
 }
-.description  p + p {
+.description p + p {
   margin-top: 0.5rem;
 }
 .description p::first-letter {
@@ -67,4 +70,119 @@
   flex-direction: column;
   flex-wrap: wrap;
   height: 100%;
+}
+
+.reviews > li:first-child:not(:only-child) {
+  padding: 0 0 1rem;
+}
+.reviews > li:last-child:not(:only-child) {
+  padding: 1rem 0 0;
+}
+.reviews > li + li:not(:last-child) {
+  padding: 1rem 0;
+}
+.reviews > li + li {
+  border-top: 1px solid #000;
+}
+.reviews > li > * + * {
+  margin-top: 0.5rem;
+}
+.reviews > li > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 1.2rem;
+}
+.reviews > li > div:first-child > div:first-child {
+  position: relative;
+  height: 4.8rem;
+  min-width: 4.8rem;
+  color: #fff;
+  border: 0.1rem solid var(--primary);
+  border-radius: 50%;
+  overflow: hidden;
+}
+.reviews > li > div:first-child > div:first-child > img {
+  width: auto;
+  height: 100%;
+  background-color: var(--danger-light);
+}
+.reviews > li > div:first-child > div:first-child > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  line-height: 0;
+  pointer-events: none;
+}
+.reviews > li > div:first-child > div:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2rem;
+  margin-left: auto;
+}
+.reviews > li > div:first-child > div:last-child > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 1rem;
+}
+.reviews > li > div:first-child > div:last-child > div > button > span {
+  height: 2rem;
+  line-height: 0;
+}
+.reviews > li > div:first-child > div:last-child > div:not(:last-child) > button {
+  color: var(--primary-light);
+}
+.reviews > li > div:first-child > div:last-child > div:last-child {
+  margin-left: 2rem;
+}
+.reviews > li > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 0.2rem;
+}
+.reviews > li > div:nth-child(2) > span {
+  height: 1.6em;
+  color: #ffc100;
+}
+.reviews > li > div:nth-child(3) > {
+  text-align: justify;
+}
+.reviews > li > div:nth-child(3) > p + p {
+  margin-top: 0.5rem;
+}
+.reviews > li > div:nth-child(3) > p::first-letter {
+  margin-left: 1.2rem;
+}
+.reviews > li > div:last-child {
+  display: none;
+}
+
+@media only screen and (max-width: 480px) {
+  .reviews > li > div:first-child > div:last-child > div:not(:last-child) {
+    display: none;
+  }
+  .reviews > li > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    column-gap: 2rem;
+  }
+  .reviews > li > div:last-child > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 1rem;
+  }
+  .reviews > li > div:last-child > div > button {
+    color: var(--primary-light);
+  }
+  .reviews > li > div:last-child > div > button > span {
+    height: 2rem;
+    line-height: 0;
+  }
 }

@@ -12,11 +12,29 @@
 .rating > :first-child > span {
   height: 2em;
   color: #ffc100;
-  margin-right: -0.2rem;
-  padding: 0.1rem;
 }
-.rating > :last-child {
+.rating > :nth-child(2) {
   font-size: 1.6rem;
-  line-height: 1.6rem;
+  line-height: 1;
   margin-left: 0.8rem;
+}
+.rating > button:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  color: #fff;
+  background-color: #009700;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  margin-left: 2rem;
+}
+.rating > button:last-child:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (max-width: 575px) {
+  .rating > button:last-child {
+    margin-left: auto;
+  }
 }

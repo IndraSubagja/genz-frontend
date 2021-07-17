@@ -1,15 +1,19 @@
 import { useContext } from 'react';
 import { useTransition, animated } from 'react-spring';
+import FocusTrap from 'focus-trap-react';
 
-import ModalContext from '../context/ModalContext';
+import GeneralContext from '../context/GeneralContext';
 
 import styles from '../styles/Modal.module.css';
 
 export default function Modal() {
   const {
-    modal: { state, component },
-    optimizeHideModal,
-  } = useContext(ModalContext);
+    modal: {
+      modal: { state, component, strict },
+      hideModal,
+      optimizeHideModal,
+    },
+  } = useContext(GeneralContext);
 
   const overlayTransition = useTransition(state, {
     from: {
@@ -44,16 +48,26 @@ export default function Modal() {
   return overlayTransition(
     (transition, item) =>
       item && (
-        <animated.div className={styles.modalOverlay} style={transition} onMouseDown={optimizeHideModal}>
-          {modalTransition(
-            (transition, item) =>
-              item && (
-                <animated.div className={styles.modal} style={transition}>
-                  {component}
-                </animated.div>
-              )
-          )}
-        </animated.div>
+        <FocusTrap>
+          <animated.dialog
+            className={styles.modalOverlay}
+            style={transition}
+            onMouseDown={!strict ? optimizeHideModal : null}
+            onKeyDown={(event) => (event.key === 'Escape' ? hideModal() : null)}
+            open={item}
+            role="dialog"
+            aria-modal="true"
+          >
+            {modalTransition(
+              (transition, item) =>
+                item && (
+                  <animated.div className={styles.modal} style={transition}>
+                    {component}
+                  </animated.div>
+                )
+            )}
+          </animated.dialog>
+        </FocusTrap>
       )
   );
 }

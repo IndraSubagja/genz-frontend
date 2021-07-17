@@ -1,17 +1,21 @@
 import { useContext } from 'react';
 import { useTransition, animated } from 'react-spring';
 
-import UserContext from '../context/UserContext';
+import GeneralContext from '../context/GeneralContext';
 
 import styles from '../styles/Loading.module.css';
 
 export default function Loading() {
-  const { loading } = useContext(UserContext);
+  const {
+    loading: {
+      loading: { state, opacity },
+    },
+  } = useContext(GeneralContext);
 
-  const loadingTransition = useTransition(loading[0], {
-    from: { opacity: loading[1] === 1 ? 1 : 0 },
-    enter: { opacity: loading[1] },
-    leave: { opacity: 0 },
+  const loadingTransition = useTransition(state, {
+    from: { opacity: opacity === 1 ? 1 : 0 },
+    enter: { opacity: opacity },
+    leave: { opacity: 0, delay: 200 },
     config: {
       duration: 200,
     },

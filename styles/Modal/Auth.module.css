@@ -1,15 +1,16 @@
 .authContainer {
-  width: 180vw;
+  width: calc(200vw - 8rem);
   max-width: 100rem;
+  transition: var(--transition-normal);
 }
 .authContainer > li {
   display: inline-block;
   vertical-align: top;
-  width: 90vw;
+  width: calc(100vw - 4rem);
   max-width: 50rem;
   color: #fff;
   padding: 1rem;
-  transition: transform 0.2s linear;
+  transition: var(--transition-normal);
 }
 
 .authBody {
@@ -18,30 +19,21 @@
   border-radius: 0.5rem;
   padding: 2rem;
 }
+.authBody > * + *,
+.authBody > form > * + * {
+  margin-top: 1rem;
+}
 .authBody > h2 {
   text-align: center;
   width: 100%;
-  margin: 1rem 0 1.5rem;
-}
-.authBody > form > * {
-  margin-bottom: 1rem;
-}
-.authBody > form > div > label {
-  display: block;
-  font-size: 1.6rem;
-  margin-bottom: 0.2rem;
-}
-.authBody > form > div > input {
-  width: 100%;
-  border-radius: 0.5rem;
-  padding: 0.8rem;
+  margin: 0 0 1.5rem;
 }
 .authBody > p {
-  padding-left: 0.8rem;
+  padding-left: 0.5rem;
 }
-.authBody > p > a {
+.authBody > p > button {
   text-decoration: underline;
 }
-.authBody > p > a:hover {
+.authBody > p > button:hover {
   color: var(--primary-light);
 }

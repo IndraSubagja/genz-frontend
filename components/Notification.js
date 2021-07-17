@@ -1,20 +1,21 @@
 import { useContext } from 'react';
 import { animated, useTransition } from 'react-spring';
-import UserContext from '../context/UserContext';
+
+import GeneralContext from '../context/GeneralContext';
 
 import styles from '../styles/Notification.module.css';
 import { ChecklistIcon, CrossIcon } from '../utils/icons';
 
 export default function Notification() {
   const {
-    notification: { state, status, message },
-    hideNotification,
-  } = useContext(UserContext);
+    notification: { notification, hideNotification },
+  } = useContext(GeneralContext);
 
-  const notificationTransition = useTransition(state, {
+  const notificationTransition = useTransition(notification.state, {
     from: { transform: 'translate(-50%, -120%)' },
     enter: { transform: 'translate(-50%, 50%)' },
     leave: { transform: 'translate(-50%, -120%)' },
+
     config: {
       duration: 200,
     },
@@ -24,16 +25,16 @@ export default function Notification() {
     (transition, item) =>
       item && (
         <animated.div className={styles.notification} style={transition}>
-          {status ? (
-            <span className="inlineIcon success">
+          {notification.status ? (
+            <span className="inline-icon success">
               <ChecklistIcon />
             </span>
           ) : (
-            <span className="inlineIcon danger">
+            <span className="inline-icon danger">
               <CrossIcon />
             </span>
           )}
-          <span>{message}</span>
+          <span>{notification.message}</span>
           <button type="button" onClick={() => hideNotification()}>
             <CrossIcon />
           </button>

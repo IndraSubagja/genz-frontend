@@ -1,0 +1,129 @@
+.orderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.orderContainer > h3 {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+.orderContainer > section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  column-gap: 2rem;
+}
+.orderContainer > section > div:last-child > * + * {
+  margin-top: 1rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+}
+
+.orderDetails {
+  flex: 1;
+}
+.orderDetails > table {
+  width: 100%;
+}
+.orderDetails > table + table {
+  margin-top: 1rem;
+}
+.orderDetails > table > tbody > tr > td > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 1rem;
+}
+.orderDetails > table > tbody > tr > td > div > img {
+  width: 6.4rem;
+}
+.orderDetails > table > tbody > tr > td > div > a:hover {
+  text-decoration: underline;
+}
+.orderDetails > table > tbody > tr > td > p {
+  flex: 1;
+}
+
+.orderSummary,
+.orderLog {
+  border: 1px solid #000;
+  padding: 1rem;
+}
+.orderSummary > * + *,
+.orderLog > * + * {
+  margin-top: 1rem;
+}
+
+.orderLog > ul {
+  position: relative;
+}
+.orderLog > ul::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 0.2rem;
+  background-color: #000;
+  left: 0.3rem;
+  top: 0.5rem;
+  height: calc(100% - 1rem);
+}
+.orderLog > ul > li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.orderLog > ul > li::after {
+  content: '';
+  display: inline-block;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  border-radius: 50%;
+}
+.orderLog > ul > li + li {
+  margin-top: 0.5rem;
+}
+
+.orderSummary > div > p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 4rem;
+  font-size: 1.6rem;
+}
+.orderSummary > div > p + p {
+  margin-top: 0.2rem;
+}
+.orderSummary > div > p:last-child {
+  margin-top: 0.5rem;
+}
+
+@media only screen and (max-width: 575px) {
+  .orderContainer > section {
+    flex-direction: column-reverse;
+    column-gap: 0;
+    row-gap: 1rem;
+  }
+  .orderContainer > section > div {
+    width: 100%;
+  }
+
+  .orderDetails > table > tbody > tr > td > div {
+    flex-direction: column;
+    column-gap: 0;
+    row-gap: 1rem;
+  }
+}

@@ -1,0 +1,62 @@
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  height: 100%;
+  max-height: calc(100vh - 14rem);
+  padding: 0.3rem;
+  overflow-y: hidden;
+}
+.sectionContainer > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1rem;
+}
+.sectionContainer > div > button:nth-child(2) {
+  flex: 1;
+}
+
+.itemsContainer {
+  height: 100%;
+  margin-bottom: 1rem;
+  padding: 0.3rem;
+  overflow-y: auto;
+}
+.itemsContainer > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 1rem;
+  height: 100%;
+}
+.itemsContainer > li + li {
+  margin-top: 1rem;
+}
+.itemsContainer > li > img {
+  width: 6.4rem;
+}
+.itemsContainer > li > :nth-child(2) {
+  flex: 1;
+}
+.itemsContainer > li > :nth-child(2) > * + * {
+  margin-top: 0.2rem;
+}
+.itemsContainer > li > :nth-child(2) > a > h3:hover {
+  text-decoration: underline;
+}
+.itemsContainer > li > :nth-child(2) > div > button {
+  color: var(--grey-dark);
+}
+.itemsContainer > li > :nth-child(2) > div > button:hover:not(:disabled) {
+  text-decoration: underline;
+}
+.itemsContainer > li > :nth-child(2) > div > button + button {
+  margin-left: 1.6rem;
+}
+
+@media only screen and (max-width: 320px) {
+  .itemsContainer > li > img {
+    width: 4.8rem;
+  }
+}

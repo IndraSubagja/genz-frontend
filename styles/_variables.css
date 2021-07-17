@@ -6,5 +6,7 @@
   --secondary-light: hsl(44, 100%, 60%);
   --danger: hsl(0, 100%, 40%);
   --danger-light: hsl(0, 100%, 50%);
+  --grey: hsl(0, 0%, 75%);
+  --grey-dark: hsl(240, 9%, 50%);
   --transition-normal: all 0.2s linear;
 }

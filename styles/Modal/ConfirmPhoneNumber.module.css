@@ -1,0 +1,64 @@
+.modalBody {
+  position: relative;
+  background-color: var(--primary);
+  border-radius: 0.5rem;
+  width: calc(100vw - 4rem);
+  max-width: 50rem;
+  color: #fff;
+  padding: 2rem;
+}
+
+.confirmPhoneNumber {
+  text-align: center;
+  width: 100%;
+  font-size: 1.4rem;
+}
+.confirmPhoneNumber > button {
+  font-size: 1.4rem;
+  text-decoration: underline;
+}
+.confirmPhoneNumber > button:hover {
+  color: var(--primary-light);
+}
+.confirmPhoneNumber + * {
+  margin-top: 1rem;
+}
+.confirmPhoneNumber + form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.confirmPhoneNumber + form > * {
+  height: 3rem;
+}
+.confirmPhoneNumber + form > button {
+  border-radius: 0;
+  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.confirmPhoneNumber + form > input {
+  text-align: center;
+  letter-spacing: 1rem;
+  border-radius: 0;
+  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  padding: 0.8rem;
+  background-color: #fff;
+}
+.confirmPhoneNumber + form > input::placeholder {
+  letter-spacing: normal;
+}
+
+@media only screen and (max-width: 320px) {
+  .confirmPhoneNumber + form {
+    flex-direction: column;
+  }
+  .confirmPhoneNumber + form > input,
+  .confirmPhoneNumber + form > button {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+  .confirmPhoneNumber + form > button {
+    margin-top: 1rem;
+  }
+}

@@ -27,8 +27,22 @@
 .details > * + * {
   margin-top: 0.5rem;
 }
+.details > :first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.details > :first-child > h1 {
+  flex: 1;
+}
+.details > :first-child > button {
+  align-self: flex-start;
+  color: var(--danger-light);
+  line-height: 0;
+  margin: 0.55rem 1.6rem;
+}
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 767px), only screen and (max-aspect-ratio: 3/2) {
   .productContainer {
     flex-direction: column;
   }

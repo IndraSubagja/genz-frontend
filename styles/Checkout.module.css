@@ -1,0 +1,44 @@
+.checkoutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.steps {
+  width: 100%;
+  height: 1rem;
+  background-color: var(--secondary);
+  margin: 1rem;
+  padding: 0 1rem;
+  border-radius: 0.5rem;
+}
+.steps > div {
+  position: relative;
+  height: 100%;
+}
+.steps > div > div {
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--grey);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.steps > div > div:nth-child(1) {
+  left: 25%;
+}
+.steps > div > div:nth-child(2) {
+  left: 50%;
+}
+.steps > div > div:nth-child(3) {
+  left: 75%;
+}
+.steps > div > div:nth-child(4) {
+  left: 100%;
+}

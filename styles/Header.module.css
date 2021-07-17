@@ -57,11 +57,20 @@
 .search > input {
   font-size: 1.4rem;
   width: 100%;
+  background-color: #fff;
+  border-radius: 0;
   border-bottom-left-radius: 2.4rem;
   border-top-left-radius: 2.4rem;
-  background-color: #fff;
 }
-.search > button {
+.search > button:nth-child(2) {
+  padding: 0.8rem;
+  background-color: #fff;
+  color: var(--grey-dark);
+}
+.search > button:nth-child(2):hover {
+  color: #000;
+}
+.search > button:last-child {
   border-bottom-right-radius: 2.4rem;
   border-top-right-radius: 2.4rem;
 }
@@ -72,23 +81,21 @@
   align-items: center;
   justify-content: space-around;
 }
-.nav > a:hover,
-.profile > a:hover {
+.nav > button:hover,
+.profile > button:hover {
   color: var(--danger-light);
 }
 
-.nav > a {
+.nav > button {
   position: relative;
   margin: 0 2rem;
 }
-.nav > a > .badge {
+.nav > button > .badge {
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
-  min-width: 1.6rem;
-  height: 1.6rem;
-  line-height: 1rem;
+  top: -20%;
+  right: -20%;
   text-align: center;
+  line-height: 1;
   color: #fff;
   background-color: #ff0000;
   border-radius: 50%;
@@ -97,18 +104,30 @@
 }
 
 .profile > .avatar {
-  background-color: #fff;
+  position: relative;
   border: 0.1rem solid #fff;
   border-radius: 50%;
-  overflow: hidden;
-  padding: 0.1rem;
+}
+.profile > .avatar:hover {
+  color: #fff;
+}
+.profile > .avatar > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  line-height: 0;
+  pointer-events: none;
 }
 .profile > .avatar > img {
+  background-color: var(--danger-light);
   width: auto;
   height: 100%;
+  border-radius: 50%;
 }
 .profile > :last-child {
-  height: 15px;
+  height: 1.5rem;
   margin-left: 0.8rem;
 }
 
@@ -128,20 +147,34 @@
   border-radius: 0.5rem;
   overflow: hidden;
 }
-.dropdown > li > a {
+.dropdown > li > a,
+.dropdown > li > button {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  padding: 1.2rem 1.6rem;
+  width: 100%;
   font-size: 1.6rem;
-  line-height: 1.6rem;
+  line-height: 1;
+  padding: 1.2rem 1.6rem;
 }
-.dropdown > li > a:hover {
+.dropdown > li > a:hover,
+.dropdown > li > button:hover,
+.dropdown > li > a:focus-visible,
+.dropdown > li > button:focus-visible {
   background-color: var(--danger-light);
+  border-radius: 0;
+  box-shadow: none;
+  outline: none;
 }
 
-@media screen and (max-width: 768px) {
-  .nav > a:last-child {
+@media only screen and (max-width: 575px) {
+  .nav {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .login > button > span + span {
     display: none;
   }
 }
